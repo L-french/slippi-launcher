@@ -28,15 +28,19 @@ export const isValidIpAndPort = (ip: string) => {
 
 export const isValidConnectCodeStart = (codeStart: string) => {
   if (codeStart.length === 0) {
-    return false;
+    return "Invalid code";
   }
-  if (!codeStart.match(/[a-zA-Z]+/g)) {
+
+  if (!/^[a-zA-Z]+$/.test(codeStart)) {
     return "Only English characters are allowed";
   }
+
   if (codeStart.length < 2) {
-    return "Too short";
-  } else if (codeStart.length > 4) {
-    return "Too long";
+    return "Code is too short";
+  }
+
+  if (codeStart.length > 4) {
+    return "Code is too long";
   }
 
   return true;
