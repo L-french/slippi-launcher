@@ -51,7 +51,7 @@ const ConnectCodeSetter: React.FC<ConnectCodeSetterProps> = ({ user, onSuccess }
   const [isWorking, setIsWorking] = React.useState(false);
   const [errMessage, setErrMessage] = React.useState("");
 
-  const { handleSubmit, watch, control, setValue } = useForm<FormValues>({ defaultValues });
+  const { handleSubmit, watch, control } = useForm<FormValues>({ defaultValues });
 
   const tag = watch("tag");
 
@@ -125,11 +125,7 @@ const ConnectCodeSetter: React.FC<ConnectCodeSetterProps> = ({ user, onSuccess }
         />
       )}
       rules={{
-        validate: (val) => {
-          const adjustedCode = val.toUpperCase().substring(0, 4);
-          setValue("tag", adjustedCode);
-          return isValidConnectCodeStart(adjustedCode);
-        },
+        validate: (val) => isValidConnectCodeStart(val),
       }}
     />
   );
